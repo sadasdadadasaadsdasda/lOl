@@ -1,0 +1,330 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for Claude-like UI */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 262.1 83.3% 57.8%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 262.1 83.3% 57.8%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 51%;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 6%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 263.4 70% 50.4%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 263.4 70% 50.4%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-foreground/30;
+  }
+}
+
+@layer components {
+  /* Chat message styles */
+  .message-user {
+    @apply bg-primary/10 dark:bg-primary/20;
+  }
+
+  .message-assistant {
+    @apply bg-secondary/50 dark:bg-secondary/30;
+  }
+
+  /* Code block styles */
+  pre {
+    @apply bg-secondary/50 dark:bg-secondary/30 rounded p-4 overflow-x-auto;
+  }
+
+  code {
+    @apply text-primary dark:text-primary-light font-mono;
+  }
+
+  /* Input area */
+  .chat-input {
+    @apply w-full min-h-[44px] max-h-[300px] p-4 pr-12 border border-border rounded-lg bg-background resize-none focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50;
+  }
+
+  /* Sidebar styles */
+  .sidebar-item {
+    @apply flex items-center gap-2 px-3 py-2 text-sm rounded-md cursor-pointer transition-colors;
+  }
+
+  .sidebar-item:hover {
+    @apply bg-accent/50;
+  }
+
+  .sidebar-item.active {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  /* Button styles */
+  .btn {
+    @apply flex items-center justify-center gap-2 font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/80;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent hover:bg-accent/50;
+  }
+
+  /* Window controls */
+  .window-controls {
+    @apply flex items-center gap-1;
+  }
+
+  .window-control-btn {
+    @apply p-2 hover:bg-accent/50 rounded transition-colors;
+  }
+
+  .window-control-btn.close {
+    @apply hover:bg-destructive/10 text-destructive/70 hover:text-destructive;
+  }
+}
+
+@layer utilities {
+  /* Text truncation */
+  .truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .truncate-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Smooth scroll */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  /* Animation utilities */
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.2s ease-out;
+  }
+
+  .animate-slide-down {
+    animation: slideDown 0.2s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Import Inter font (Claude uses Inter) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Apply Inter font globally */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Fix for code blocks in markdown */
+.react-markdown code {
+  @apply text-primary dark:text-primary-light font-mono bg-secondary/20 dark:bg-secondary/40 px-1 rounded;
+}
+
+/* Fix for pre blocks in markdown */
+.react-markdown pre {
+  @apply bg-secondary/50 dark:bg-secondary/30 rounded p-4 overflow-x-auto my-2;
+}
+
+/* Table styles for markdown */
+.react-markdown table {
+  @apply border-collapse border border-border my-2;
+}
+
+.react-markdown th {
+  @apply border border-border px-4 py-2 bg-secondary text-left;
+}
+
+.react-markdown td {
+  @apply border border-border px-4 py-2;
+}
+
+/* Blockquote styles */
+.react-markdown blockquote {
+  @apply border-l-4 border-primary/30 pl-4 py-2 my-2;
+}
+
+/* Link styles */
+.react-markdown a {
+  @apply text-primary dark:text-primary-light hover:underline;
+}
+
+/* Image styles */
+.react-markdown img {
+  @apply max-w-full h-auto rounded;
+}
+
+/* List styles */
+.react-markdown ul,
+.react-markdown ol {
+  @apply pl-6 my-2;
+}
+
+.react-markdown li {
+  @apply my-1;
+}
+
+/* Heading styles */
+.react-markdown h1 {
+  @apply text-3xl font-bold my-4;
+}
+
+.react-markdown h2 {
+  @apply text-2xl font-bold my-3;
+}
+
+.react-markdown h3 {
+  @apply text-xl font-bold my-2;
+}
+
+.react-markdown h4 {
+  @apply text-lg font-semibold my-2;
+}
+
+.react-markdown h5 {
+  @apply text-base font-semibold my-1;
+}
+
+.react-markdown h6 {
+  @apply text-sm font-semibold my-1;
+}
+
+/* Paragraph styles */
+.react-markdown p {
+  @apply my-2;
+}
+
+/* Horizontal rule */
+.react-markdown hr {
+  @apply border-border my-4;
+}

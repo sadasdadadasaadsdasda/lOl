@@ -1,0 +1,10 @@
+export { default as Sidebar } from './Sidebar';
+export { default as ChatView } from './ChatView';
+export { default as SettingsView } from './SettingsView';
+export { default as NewChatButton } from './NewChatButton';
+export { default as WindowControls } from './WindowControls';
+export { default as ModelSelector } from './ModelSelector';
+export { default as SearchView } from './SearchView';
+export { default as ProjectsView } from './ProjectsView';
+export { default as ArtifactsView } from './ArtifactsView';
+export { default as MCPView } from './MCPView';
